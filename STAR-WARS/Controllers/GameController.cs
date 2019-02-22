@@ -22,12 +22,15 @@ namespace STAR_WARS.Controllers
 
         }
 
-        // GET: Game
-        public ActionResult Fight(int nombreWookie, int nombreDroide, string planete)
+        [HttpPost]
+        public ActionResult Fight(int nbWookie, int nbDroide, int planete)
         {
             ActionResult result = this.RedirectToAction("Index", "Login");
             if (this.Session["USER_LOGIN"] != null && !string.IsNullOrEmpty(this.Session["USER_LOGIN"].ToString()))
             {
+                ViewBag.nbWookie = nbWookie;
+                ViewBag.nbDroide = nbDroide;
+                ViewBag.planete = _dataLayer.getById(planete);
                 result = this.View();
             }
             return result;
