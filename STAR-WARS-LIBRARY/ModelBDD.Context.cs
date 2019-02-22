@@ -29,5 +29,9 @@ namespace STAR_WARS_LIBRARY
         public virtual DbSet<Planete> Planete { get; set; }
         public virtual DbSet<Type> Type { get; set; }
         public virtual DbSet<Wookie> Wookie { get; set; }
+        public virtual DbSet<Bataille> Bataille { get; set; }
+        public virtual DbSet<Combat> Combat { get; set; }
+        public virtual DbSet<Historique> Historique { get; set; }
+        public virtual DbSet<Utilisateur> Utilisateur { get; set; }
     }
 }

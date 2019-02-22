@@ -14,12 +14,22 @@ namespace STAR_WARS_LIBRARY
     
     public partial class Droide
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Droide()
+        {
+            this.Combat = new HashSet<Combat>();
+            this.Historique = new HashSet<Historique>();
+        }
+    
         public int ID { get; set; }
         public string Matricule { get; set; }
         public Nullable<System.DateTime> DateDeF { get; set; }
         public Nullable<int> TypeID { get; set; }
-        public Nullable<int> PointsDeVie { get; set; }
     
         public virtual Type Type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Combat> Combat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Historique> Historique { get; set; }
     }
 }

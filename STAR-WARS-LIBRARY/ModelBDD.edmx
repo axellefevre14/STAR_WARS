@@ -4,7 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bataille">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="DateDeD" Type="datetime" />
+          <Property Name="DateDeF" Type="datetime" />
+          <Property Name="PlaneteID" Type="int" />
+        </EntityType>
+        <EntityType Name="Combat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDeC" Type="datetime" />
+          <Property Name="WookieID" Type="int" />
+          <Property Name="DroideID" Type="int" />
+          <Property Name="Vainqueur" Type="int" />
+          <Property Name="batailleID" Type="int" />
+        </EntityType>
         <EntityType Name="Droide">
           <Key>
             <PropertyRef Name="ID" />
@@ -13,7 +34,17 @@
           <Property Name="Matricule" Type="nvarchar" MaxLength="50" />
           <Property Name="DateDeF" Type="datetime" />
           <Property Name="TypeID" Type="int" />
-          <Property Name="PointsDeVie" Type="int" />
+        </EntityType>
+        <EntityType Name="Historique">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDeH" Type="datetime" />
+          <Property Name="WookieID" Type="int" />
+          <Property Name="DroideID" Type="int" />
+          <Property Name="batailleID" Type="int" />
+          <Property Name="pointsDeVie" Type="int" />
         </EntityType>
         <EntityType Name="Planete">
           <Key>
@@ -29,6 +60,18 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="DateDeN" Type="datetime" />
+          <Property Name="Password" Type="char" MaxLength="64" />
+          <Property Name="Pseudo" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Wookie">
           <Key>
             <PropertyRef Name="ID" />
@@ -39,6 +82,78 @@
           <Property Name="Sexe" Type="bit" />
           <Property Name="PlaneteID" Type="int" />
         </EntityType>
+        <Association Name="FK__Bataille__Planet__4316F928">
+          <End Role="Planete" Type="Self.Planete" Multiplicity="0..1" />
+          <End Role="Bataille" Type="Self.Bataille" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bataille">
+              <PropertyRef Name="PlaneteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Combat__bataille__47DBAE45">
+          <End Role="Bataille" Type="Self.Bataille" Multiplicity="0..1" />
+          <End Role="Combat" Type="Self.Combat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bataille">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Combat">
+              <PropertyRef Name="batailleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Combat__DroideID__46E78A0C">
+          <End Role="Droide" Type="Self.Droide" Multiplicity="0..1" />
+          <End Role="Combat" Type="Self.Combat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Droide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Combat">
+              <PropertyRef Name="DroideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Combat__WookieID__45F365D3">
+          <End Role="Wookie" Type="Self.Wookie" Multiplicity="0..1" />
+          <End Role="Combat" Type="Self.Combat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wookie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Combat">
+              <PropertyRef Name="WookieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historiqu__batai__4CA06362">
+          <End Role="Bataille" Type="Self.Bataille" Multiplicity="0..1" />
+          <End Role="Historique" Type="Self.Historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bataille">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Historique">
+              <PropertyRef Name="batailleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historiqu__Droid__4BAC3F29">
+          <End Role="Droide" Type="Self.Droide" Multiplicity="0..1" />
+          <End Role="Historique" Type="Self.Historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Droide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Historique">
+              <PropertyRef Name="DroideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Droide_Type">
           <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
           <End Role="Droide" Type="Self.Droide" Multiplicity="*" />
@@ -48,6 +163,18 @@
             </Principal>
             <Dependent Role="Droide">
               <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historique_Wookie">
+          <End Role="Wookie" Type="Self.Wookie" Multiplicity="0..1" />
+          <End Role="Historique" Type="Self.Historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wookie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Historique">
+              <PropertyRef Name="WookieID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -64,21 +191,52 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BDDModelStoreContainer">
+          <EntitySet Name="Bataille" EntityType="Self.Bataille" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Combat" EntityType="Self.Combat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Droide" EntityType="Self.Droide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historique" EntityType="Self.Historique" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planete" EntityType="Self.Planete" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wookie" EntityType="Self.Wookie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bataille__Planet__4316F928" Association="Self.FK__Bataille__Planet__4316F928">
+            <End Role="Planete" EntitySet="Planete" />
+            <End Role="Bataille" EntitySet="Bataille" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Combat__bataille__47DBAE45" Association="Self.FK__Combat__bataille__47DBAE45">
+            <End Role="Bataille" EntitySet="Bataille" />
+            <End Role="Combat" EntitySet="Combat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Combat__DroideID__46E78A0C" Association="Self.FK__Combat__DroideID__46E78A0C">
+            <End Role="Droide" EntitySet="Droide" />
+            <End Role="Combat" EntitySet="Combat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Combat__WookieID__45F365D3" Association="Self.FK__Combat__WookieID__45F365D3">
+            <End Role="Wookie" EntitySet="Wookie" />
+            <End Role="Combat" EntitySet="Combat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historiqu__batai__4CA06362" Association="Self.FK__Historiqu__batai__4CA06362">
+            <End Role="Bataille" EntitySet="Bataille" />
+            <End Role="Historique" EntitySet="Historique" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historiqu__Droid__4BAC3F29" Association="Self.FK__Historiqu__Droid__4BAC3F29">
+            <End Role="Droide" EntitySet="Droide" />
+            <End Role="Historique" EntitySet="Historique" />
+          </AssociationSet>
           <AssociationSet Name="FK_Droide_Type" Association="Self.FK_Droide_Type">
             <End Role="Type" EntitySet="Type" />
             <End Role="Droide" EntitySet="Droide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historique_Wookie" Association="Self.FK_Historique_Wookie">
+            <End Role="Wookie" EntitySet="Wookie" />
+            <End Role="Historique" EntitySet="Historique" />
           </AssociationSet>
           <AssociationSet Name="FK_Wookie_Planete" Association="Self.FK_Wookie_Planete">
             <End Role="Planete" EntitySet="Planete" />
             <End Role="Wookie" EntitySet="Wookie" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -90,8 +248,9 @@
           <Property Name="Matricule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateDeF" Type="DateTime" Precision="3" />
           <Property Name="TypeID" Type="Int32" />
-          <Property Name="PointsDeVie" Type="Int32" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Droide_Type" FromRole="Droide" ToRole="Type" />
+          <NavigationProperty Name="Combat" Relationship="BDDModel.FK__Combat__DroideID__46E78A0C" FromRole="Droide" ToRole="Combat" />
+          <NavigationProperty Name="Historique" Relationship="BDDModel.FK__Historiqu__Droid__4BAC3F29" FromRole="Droide" ToRole="Historique" />
         </EntityType>
         <EntityType Name="Planete">
           <Key>
@@ -100,6 +259,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Wookie" Relationship="Self.FK_Wookie_Planete" FromRole="Planete" ToRole="Wookie" />
+          <NavigationProperty Name="Bataille" Relationship="BDDModel.FK__Bataille__Planet__4316F928" FromRole="Planete" ToRole="Bataille" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -119,6 +279,8 @@
           <Property Name="Sexe" Type="Boolean" />
           <Property Name="PlaneteID" Type="Int32" />
           <NavigationProperty Name="Planete" Relationship="Self.FK_Wookie_Planete" FromRole="Wookie" ToRole="Planete" />
+          <NavigationProperty Name="Combat" Relationship="BDDModel.FK__Combat__WookieID__45F365D3" FromRole="Wookie" ToRole="Combat" />
+          <NavigationProperty Name="Historique" Relationship="BDDModel.FK_Historique_Wookie" FromRole="Wookie" ToRole="Historique" />
         </EntityType>
         <Association Name="FK_Droide_Type">
           <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
@@ -157,7 +319,176 @@
             <End Role="Planete" EntitySet="Planete" />
             <End Role="Wookie" EntitySet="Wookie" />
           </AssociationSet>
+          <EntitySet Name="Bataille" EntityType="BDDModel.Bataille" />
+          <EntitySet Name="Combat" EntityType="BDDModel.Combat" />
+          <EntitySet Name="Historique" EntityType="BDDModel.Historique" />
+          <EntitySet Name="Utilisateur" EntityType="BDDModel.Utilisateur" />
+          <AssociationSet Name="FK__Bataille__Planet__4316F928" Association="BDDModel.FK__Bataille__Planet__4316F928">
+            <End Role="Planete" EntitySet="Planete" />
+            <End Role="Bataille" EntitySet="Bataille" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Combat__bataille__47DBAE45" Association="BDDModel.FK__Combat__bataille__47DBAE45">
+            <End Role="Bataille" EntitySet="Bataille" />
+            <End Role="Combat" EntitySet="Combat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historiqu__batai__4CA06362" Association="BDDModel.FK__Historiqu__batai__4CA06362">
+            <End Role="Bataille" EntitySet="Bataille" />
+            <End Role="Historique" EntitySet="Historique" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Combat__DroideID__46E78A0C" Association="BDDModel.FK__Combat__DroideID__46E78A0C">
+            <End Role="Droide" EntitySet="Droide" />
+            <End Role="Combat" EntitySet="Combat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Combat__WookieID__45F365D3" Association="BDDModel.FK__Combat__WookieID__45F365D3">
+            <End Role="Wookie" EntitySet="Wookie" />
+            <End Role="Combat" EntitySet="Combat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historiqu__Droid__4BAC3F29" Association="BDDModel.FK__Historiqu__Droid__4BAC3F29">
+            <End Role="Droide" EntitySet="Droide" />
+            <End Role="Historique" EntitySet="Historique" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historique_Wookie" Association="BDDModel.FK_Historique_Wookie">
+            <End Role="Wookie" EntitySet="Wookie" />
+            <End Role="Historique" EntitySet="Historique" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Bataille">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateDeD" Type="DateTime" Precision="3" />
+          <Property Name="DateDeF" Type="DateTime" Precision="3" />
+          <Property Name="PlaneteID" Type="Int32" />
+          <NavigationProperty Name="Planete" Relationship="BDDModel.FK__Bataille__Planet__4316F928" FromRole="Bataille" ToRole="Planete" />
+          <NavigationProperty Name="Combat" Relationship="BDDModel.FK__Combat__bataille__47DBAE45" FromRole="Bataille" ToRole="Combat" />
+          <NavigationProperty Name="Historique" Relationship="BDDModel.FK__Historiqu__batai__4CA06362" FromRole="Bataille" ToRole="Historique" />
+        </EntityType>
+        <EntityType Name="Combat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDeC" Type="DateTime" Precision="3" />
+          <Property Name="WookieID" Type="Int32" />
+          <Property Name="DroideID" Type="Int32" />
+          <Property Name="Vainqueur" Type="Int32" />
+          <Property Name="batailleID" Type="Int32" />
+          <NavigationProperty Name="Bataille" Relationship="BDDModel.FK__Combat__bataille__47DBAE45" FromRole="Combat" ToRole="Bataille" />
+          <NavigationProperty Name="Droide" Relationship="BDDModel.FK__Combat__DroideID__46E78A0C" FromRole="Combat" ToRole="Droide" />
+          <NavigationProperty Name="Wookie" Relationship="BDDModel.FK__Combat__WookieID__45F365D3" FromRole="Combat" ToRole="Wookie" />
+        </EntityType>
+        <EntityType Name="Historique">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDeH" Type="DateTime" Precision="3" />
+          <Property Name="WookieID" Type="Int32" />
+          <Property Name="DroideID" Type="Int32" />
+          <Property Name="batailleID" Type="Int32" />
+          <Property Name="pointsDeVie" Type="Int32" />
+          <NavigationProperty Name="Bataille" Relationship="BDDModel.FK__Historiqu__batai__4CA06362" FromRole="Historique" ToRole="Bataille" />
+          <NavigationProperty Name="Droide" Relationship="BDDModel.FK__Historiqu__Droid__4BAC3F29" FromRole="Historique" ToRole="Droide" />
+          <NavigationProperty Name="Wookie" Relationship="BDDModel.FK_Historique_Wookie" FromRole="Historique" ToRole="Wookie" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateDeN" Type="DateTime" Precision="3" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="Pseudo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Bataille__Planet__4316F928">
+          <End Type="BDDModel.Planete" Role="Planete" Multiplicity="0..1" />
+          <End Type="BDDModel.Bataille" Role="Bataille" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bataille">
+              <PropertyRef Name="PlaneteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Combat__bataille__47DBAE45">
+          <End Type="BDDModel.Bataille" Role="Bataille" Multiplicity="0..1" />
+          <End Type="BDDModel.Combat" Role="Combat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bataille">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Combat">
+              <PropertyRef Name="batailleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historiqu__batai__4CA06362">
+          <End Type="BDDModel.Bataille" Role="Bataille" Multiplicity="0..1" />
+          <End Type="BDDModel.Historique" Role="Historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bataille">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Historique">
+              <PropertyRef Name="batailleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Combat__DroideID__46E78A0C">
+          <End Type="BDDModel.Droide" Role="Droide" Multiplicity="0..1" />
+          <End Type="BDDModel.Combat" Role="Combat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Droide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Combat">
+              <PropertyRef Name="DroideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Combat__WookieID__45F365D3">
+          <End Type="BDDModel.Wookie" Role="Wookie" Multiplicity="0..1" />
+          <End Type="BDDModel.Combat" Role="Combat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wookie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Combat">
+              <PropertyRef Name="WookieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historiqu__Droid__4BAC3F29">
+          <End Type="BDDModel.Droide" Role="Droide" Multiplicity="0..1" />
+          <End Type="BDDModel.Historique" Role="Historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Droide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Historique">
+              <PropertyRef Name="DroideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historique_Wookie">
+          <End Type="BDDModel.Wookie" Role="Wookie" Multiplicity="0..1" />
+          <End Type="BDDModel.Historique" Role="Historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wookie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Historique">
+              <PropertyRef Name="WookieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -171,7 +502,6 @@
                 <ScalarProperty Name="Matricule" ColumnName="Matricule" />
                 <ScalarProperty Name="DateDeF" ColumnName="DateDeF" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="PointsDeVie" ColumnName="PointsDeVie" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -199,6 +529,54 @@
                 <ScalarProperty Name="DateDeN" ColumnName="DateDeN" />
                 <ScalarProperty Name="Sexe" ColumnName="Sexe" />
                 <ScalarProperty Name="PlaneteID" ColumnName="PlaneteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bataille">
+            <EntityTypeMapping TypeName="BDDModel.Bataille">
+              <MappingFragment StoreEntitySet="Bataille">
+                <ScalarProperty Name="PlaneteID" ColumnName="PlaneteID" />
+                <ScalarProperty Name="DateDeF" ColumnName="DateDeF" />
+                <ScalarProperty Name="DateDeD" ColumnName="DateDeD" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Combat">
+            <EntityTypeMapping TypeName="BDDModel.Combat">
+              <MappingFragment StoreEntitySet="Combat">
+                <ScalarProperty Name="batailleID" ColumnName="batailleID" />
+                <ScalarProperty Name="Vainqueur" ColumnName="Vainqueur" />
+                <ScalarProperty Name="DroideID" ColumnName="DroideID" />
+                <ScalarProperty Name="WookieID" ColumnName="WookieID" />
+                <ScalarProperty Name="DateDeC" ColumnName="DateDeC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historique">
+            <EntityTypeMapping TypeName="BDDModel.Historique">
+              <MappingFragment StoreEntitySet="Historique">
+                <ScalarProperty Name="pointsDeVie" ColumnName="pointsDeVie" />
+                <ScalarProperty Name="batailleID" ColumnName="batailleID" />
+                <ScalarProperty Name="DroideID" ColumnName="DroideID" />
+                <ScalarProperty Name="WookieID" ColumnName="WookieID" />
+                <ScalarProperty Name="DateDeH" ColumnName="DateDeH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateur">
+            <EntityTypeMapping TypeName="BDDModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="Pseudo" ColumnName="Pseudo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DateDeN" ColumnName="DateDeN" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,21 +12,25 @@ namespace STAR_WARS_LIBRARY
     using System;
     using System.Collections.Generic;
     
-    public partial class Planete
+    public partial class Bataille
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Planete()
+        public Bataille()
         {
-            this.Wookie = new HashSet<Wookie>();
-            this.Bataille = new HashSet<Bataille>();
+            this.Combat = new HashSet<Combat>();
+            this.Historique = new HashSet<Historique>();
         }
     
         public int ID { get; set; }
         public string Nom { get; set; }
+        public Nullable<System.DateTime> DateDeD { get; set; }
+        public Nullable<System.DateTime> DateDeF { get; set; }
+        public Nullable<int> PlaneteID { get; set; }
     
+        public virtual Planete Planete { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Wookie> Wookie { get; set; }
+        public virtual ICollection<Combat> Combat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bataille> Bataille { get; set; }
+        public virtual ICollection<Historique> Historique { get; set; }
     }
 }
