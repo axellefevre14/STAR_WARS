@@ -292,6 +292,7 @@
     <Content Include="Views\Type\Edit.cshtml" />
     <Content Include="Views\Game\Fight.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Game\End.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

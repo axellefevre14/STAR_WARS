@@ -42,7 +42,16 @@
     <div style="flex:5">
         <img src="https://icons-for-free.com/free-icons/png/512/2624876.png" width="150px" />
     </div>
+</div><br />
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5">
+        <form method="post" action="/Game/End">
+            <input name="nbWookie" type="hidden" class="form-control" value="@nbWookie">
+            <input name="nbDroide" type="hidden" class="form-control" value="@nbDroide">
+            <input name="planete" type="hidden" class="form-control" value="@planete">
+            <input name="nomBataille" type="hidden" class="form-control" value="@bataille">
+            <button type="submit" class="btn btn-primary demarrer">Démarrer la partie</button>
+        </form>
+    </div>
 </div>
-    
-
-

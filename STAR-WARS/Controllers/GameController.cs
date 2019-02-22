@@ -43,5 +43,23 @@ namespace STAR_WARS.Controllers
             return result;
 
         }
+
+        [HttpPost]
+        public ActionResult End(int nbWookie, int nbDroide, string planete, string nomBataille)
+        {
+            ActionResult result = this.RedirectToAction("Index", "Login");
+            if (this.Session["USER_LOGIN"] != null && !string.IsNullOrEmpty(this.Session["USER_LOGIN"].ToString()))
+            {
+                
+
+                ViewBag.bataille = nomBataille;
+                ViewBag.nbWookie = nbWookie;
+                ViewBag.nbDroide = nbDroide;
+                ViewBag.planete = planete;
+                result = this.View();
+            }
+            return result;
+
+        }
     }
 }
