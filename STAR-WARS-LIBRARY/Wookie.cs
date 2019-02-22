@@ -14,6 +14,13 @@ namespace STAR_WARS_LIBRARY
     
     public partial class Wookie
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Wookie()
+        {
+            this.Combat = new HashSet<Combat>();
+            this.Historique = new HashSet<Historique>();
+        }
+    
         public int ID { get; set; }
         public string Nom { get; set; }
         public Nullable<System.DateTime> DateDeN { get; set; }
@@ -21,5 +28,9 @@ namespace STAR_WARS_LIBRARY
         public Nullable<int> PlaneteID { get; set; }
     
         public virtual Planete Planete { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Combat> Combat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Historique> Historique { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Fight";
+    string planete = ViewBag.planete;
+    string bataille = ViewBag.bataille;
+
+    string vainqueur = ViewBag.vainqueur;
+    int nbDroideFinal = ViewBag.nbDroideFinal;
+    int nbWookieFinal =  ViewBag.nbWookieFinal;
+
+}
+
+<h2>End - @bataille</h2>
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5"><h1>@nbWookieFinal</h1></div>
+    <div style="flex:1"></div>
+    <div style="flex:5">
+        <h2>Vainqueur</h2>
+        <h1>@vainqueur</h1>
+    </div>
+    <div style="flex:1"></div>
+    <div style="flex:5"><h1>@nbDroideFinal</h1></div>
+</div>
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5"><h2>WOOKIE</h2></div>
+    <div style="flex:1"></div>
+    <div style="flex:5"><h2>@planete</h2></div>
+    <div style="flex:1"></div>
+    <div style="flex:5"><h2>DROIDE</h2></div>
+</div>
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5">
+        <img src="https://cdn3.iconfinder.com/data/icons/star-wars-color/229/chewbacca-512.png" width="100px" />
+    </div>
+    <div style="flex:1">
+        <img src="https://www.dnb.com/content/dam/english/image-library/Modernization/other/loading-dots.gif" width="100px" />
+    </div>
+    <div style="flex:5">
+        <img src="http://clipground.com/images/mars-clipart-1.jpg" width="200px" />
+    </div>
+
+    <div style="flex:1">
+        <img style="-moz-transform: scaleX(-1);-o-transform: scaleX(-1);-webkit-transform: scaleX(-1); transform: scaleX(-1);filter: FlipH;-ms-filter: 'FlipH';" src="https://www.dnb.com/content/dam/english/image-library/Modernization/other/loading-dots.gif" width="100px" />
+    </div>
+    <div style="flex:5">
+        <img src="https://icons-for-free.com/free-icons/png/512/2624876.png" width="150px" />
+    </div>
+</div>
+

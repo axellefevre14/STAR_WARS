@@ -11,6 +11,17 @@
         <EntityTypeShape EntityType="BDDModel.Wookie" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="BDDModel.FK_Droide_Type" ManuallyRouted="false" />
         <AssociationConnector Association="BDDModel.FK_Wookie_Planete" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDDModel.Bataille" Width="1.5" PointX="3" PointY="8.875" />
+        <EntityTypeShape EntityType="BDDModel.Combat" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDModel.Historique" Width="1.5" PointX="8.25" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDModel.Utilisateur" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="BDDModel.FK__Bataille__Planet__4316F928" />
+        <AssociationConnector Association="BDDModel.FK__Combat__bataille__47DBAE45" />
+        <AssociationConnector Association="BDDModel.FK__Historiqu__batai__4CA06362" />
+        <AssociationConnector Association="BDDModel.FK__Combat__DroideID__46E78A0C" />
+        <AssociationConnector Association="BDDModel.FK__Combat__WookieID__45F365D3" />
+        <AssociationConnector Association="BDDModel.FK__Historiqu__Droid__4BAC3F29" />
+        <AssociationConnector Association="BDDModel.FK_Historique_Wookie" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

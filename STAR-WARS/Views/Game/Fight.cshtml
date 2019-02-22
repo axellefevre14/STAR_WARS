@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Fight";
+    int nbWookie = ViewBag.nbWookie;
+    int nbDroide = ViewBag.nbDroide;
+    string planete = ViewBag.planete.Nom;
+    string bataille = ViewBag.bataille;
+}
+
+<h2>Fight - @bataille</h2>
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5"><h1>@nbWookie</h1></div>
+    <div style="flex:1"></div>
+    <div style="flex:5"></div>
+    <div style="flex:1"></div>
+    <div style="flex:5"><h1>@nbDroide</h1></div>
+</div>
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5"><h2>WOOKIE</h2></div>
+    <div style="flex:1"></div>
+    <div style="flex:5"><h2>@planete</h2></div>
+    <div style="flex:1"></div>
+    <div style="flex:5"><h2>DROIDE</h2></div>
+</div>
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5">
+        <img src="https://cdn3.iconfinder.com/data/icons/star-wars-color/229/chewbacca-512.png" width="100px" />
+    </div>
+        <div style="flex:1">
+            <img src="https://www.dnb.com/content/dam/english/image-library/Modernization/other/loading-dots.gif" width="100px" />
+        </div>
+    <div style="flex:5">
+        <img src="http://clipground.com/images/mars-clipart-1.jpg" width="200px" />
+    </div>
+
+        <div style="flex:1">
+            <img style="-moz-transform: scaleX(-1);-o-transform: scaleX(-1);-webkit-transform: scaleX(-1); transform: scaleX(-1);filter: FlipH;-ms-filter: 'FlipH';" src="https://www.dnb.com/content/dam/english/image-library/Modernization/other/loading-dots.gif" width="100px" />
+        </div>
+    <div style="flex:5">
+        <img src="https://icons-for-free.com/free-icons/png/512/2624876.png" width="150px" />
+    </div>
+</div><br />
+
+<div style="display:flex;text-align:center;">
+    <div style="flex:5">
+        <form method="post" action="/Game/End">
+            <input name="nbWookie" type="hidden" class="form-control" value="@nbWookie">
+            <input name="nbDroide" type="hidden" class="form-control" value="@nbDroide">
+            <input name="planete" type="hidden" class="form-control" value="@planete">
+            <input name="nomBataille" type="hidden" class="form-control" value="@bataille">
+            <button type="submit" class="btn btn-primary demarrer">Démarrer la partie</button>
+        </form>
+    </div>
+</div>
