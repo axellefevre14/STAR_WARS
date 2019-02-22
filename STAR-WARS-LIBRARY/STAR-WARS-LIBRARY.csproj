@@ -54,10 +54,12 @@
     <Compile Include="Bataille.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="BatailleDataLayer.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Combat.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="CombatDataLayer.cs" />
     <Compile Include="Droide.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
