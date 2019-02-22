@@ -10,6 +10,7 @@ namespace STAR_WARS.Controllers
     public class GameController : Controller
     {
         private PlaneteDataLayer _dataLayer = new PlaneteDataLayer();
+        private BatailleDataLayer batailleLayer = new BatailleDataLayer();
 
         public ActionResult Index()
         {
@@ -28,6 +29,9 @@ namespace STAR_WARS.Controllers
             ActionResult result = this.RedirectToAction("Index", "Login");
             if (this.Session["USER_LOGIN"] != null && !string.IsNullOrEmpty(this.Session["USER_LOGIN"].ToString()))
             {
+
+                batailleLayer.add(new Bataille { Nom = "Bataille 1", PlaneteID = _dataLayer.getById(planete).ID });
+
                 ViewBag.nbWookie = nbWookie;
                 ViewBag.nbDroide = nbDroide;
                 ViewBag.planete = _dataLayer.getById(planete);
