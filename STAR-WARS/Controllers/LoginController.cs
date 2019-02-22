@@ -23,7 +23,7 @@ namespace STAR_WARS.Controllers
             this.Session["USER_PASSWORD"] = password;
 
 
-            return RedirectToAction("Fight", "Game", new { nbWookies = 50, nbDroides = 1000, nomPlanete = "Dagoba" });
+            return RedirectToAction("Index", "Game");
         }
 
     }

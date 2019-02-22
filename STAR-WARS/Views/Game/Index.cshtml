@@ -1,0 +1,21 @@
+﻿@model IEnumerable<STAR_WARS_LIBRARY.Planete>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Paramètres de jeu</h2>
+
+
+
+<form>
+    <input name="nbWookie" type="number" class="form-control" placeholder="NOMBRE DE WOOKIES" required="" autofocus="">
+    <input name="nbDroide" type="number" class="form-control" placeholder="NOMBRE DE DROIDES" required="" autofocus="">
+    <select class="form-control">
+        <option value="" disabled selected>Planète</option>
+        @foreach (var item in Model)
+        {
+           <option>@Html.DisplayFor(modelItem => item.Nom)</option>         
+        }
+    </select>
+    <button type="submit" class="btn btn-primary demarrer">Démarrer la partie</button>
+</form>
