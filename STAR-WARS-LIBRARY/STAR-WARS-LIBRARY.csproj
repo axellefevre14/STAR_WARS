@@ -55,6 +55,7 @@
     <Compile Include="Droide.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="DroideDataLayer.cs" />
     <Compile Include="ModelBDD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,13 +74,16 @@
     <Compile Include="Planete.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="PlaneteDataLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Type.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="TypeDataLayer.cs" />
     <Compile Include="Wookie.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="WookieDataLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelBDD.edmx">
