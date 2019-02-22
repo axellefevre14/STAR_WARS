@@ -13,5 +13,18 @@ namespace STAR_WARS.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult Index(string email, string password)
+        {
+
+            this.Session["USER_LOGIN"] = email;
+            this.Session["USER_PASSWORD"] = password;
+
+
+            return RedirectToAction("Fight", "Game", new { nbWookies = 50, nbDroides = 1000, nomPlanete = "Dagoba" });
+        }
+
     }
 }
