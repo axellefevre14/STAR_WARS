@@ -277,13 +277,21 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Wookie\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Droide\Index.cshtml" />
+    <Content Include="Views\Droide\Edit.cshtml" />
+    <Content Include="Views\Droide\Create.cshtml" />
+    <Content Include="Views\Planete\Index.cshtml" />
+    <Content Include="Views\Planete\Create.cshtml" />
+    <Content Include="Views\Planete\Edit.cshtml" />
+    <Content Include="Views\Wookie\Edit.cshtml" />
+    <Content Include="Views\Wookie\Create.cshtml" />
+    <Content Include="Views\Type\Index.cshtml" />
+    <Content Include="Views\Type\Create.cshtml" />
+    <Content Include="Views\Type\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Droide\" />
     <Folder Include="Views\Game\" />
-    <Folder Include="Views\Planete\" />
-    <Folder Include="Views\Type\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
