@@ -1,20 +1,26 @@
 ﻿
 @{
     ViewBag.Title = "Fight";
-    int nbWookie = ViewBag.nbWookie;
-    int nbDroide = ViewBag.nbDroide;
     string planete = ViewBag.planete;
     string bataille = ViewBag.bataille;
+
+    string vainqueur = ViewBag.vainqueur;
+    int nbDroideFinal = ViewBag.nbDroideFinal;
+    int nbWookieFinal =  ViewBag.nbWookieFinal;
+
 }
 
 <h2>End - @bataille</h2>
 
 <div style="display:flex;text-align:center;">
-    <div style="flex:5"><h1>@nbWookie</h1></div>
+    <div style="flex:5"><h1>@nbWookieFinal</h1></div>
     <div style="flex:1"></div>
-    <div style="flex:5"></div>
+    <div style="flex:5">
+        <h2>Vainqueur</h2>
+        <h1>@vainqueur</h1>
+    </div>
     <div style="flex:1"></div>
-    <div style="flex:5"><h1>@nbDroide</h1></div>
+    <div style="flex:5"><h1>@nbDroideFinal</h1></div>
 </div>
 
 <div style="display:flex;text-align:center;">
