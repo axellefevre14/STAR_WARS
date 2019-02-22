@@ -51,11 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bataille.cs">
+      <DependentUpon>ModelBDD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="Combat.cs">
+      <DependentUpon>ModelBDD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Droide.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
     <Compile Include="DroideDataLayer.cs" />
+    <Compile Include="Historique.cs">
+      <DependentUpon>ModelBDD.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelBDD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,6 +89,9 @@
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
     <Compile Include="TypeDataLayer.cs" />
+    <Compile Include="Utilisateur.cs">
+      <DependentUpon>ModelBDD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Wookie.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
