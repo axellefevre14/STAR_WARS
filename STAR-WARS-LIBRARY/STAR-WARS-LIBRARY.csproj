@@ -67,6 +67,7 @@
     <Compile Include="Historique.cs">
       <DependentUpon>ModelBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="HistoriqueDataLayer.cs" />
     <Compile Include="ModelBDD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
