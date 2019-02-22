@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STAR_WARS_LIBRARY
 {
-    class DroideDataLayer
+    public class DroideDataLayer
     {
 
         public List<Droide> getAll()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STAR_WARS_LIBRARY
 {
-    class TypeDataLayer
+    public class TypeDataLayer
     {
 
         public List<Type> getAll()

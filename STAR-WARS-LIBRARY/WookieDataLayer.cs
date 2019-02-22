@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STAR_WARS_LIBRARY
 {
-    class WookieDataLayer
+    public class WookieDataLayer
     {
 
         public List<Wookie> getAll()
