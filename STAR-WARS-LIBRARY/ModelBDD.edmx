@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Droide">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Matricule" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateDeF" Type="datetime" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="PointsDeVie" Type="int" />
+        </EntityType>
+        <EntityType Name="Planete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Wookie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateDeN" Type="datetime" />
+          <Property Name="Sexe" Type="bit" />
+          <Property Name="PlaneteID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Droide_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Droide" Type="Self.Droide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Droide">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wookie_Planete">
+          <End Role="Planete" Type="Self.Planete" Multiplicity="0..1" />
+          <End Role="Wookie" Type="Self.Wookie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Wookie">
+              <PropertyRef Name="PlaneteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDDModelStoreContainer">
+          <EntitySet Name="Droide" EntityType="Self.Droide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planete" EntityType="Self.Planete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wookie" EntityType="Self.Wookie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Droide_Type" Association="Self.FK_Droide_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Droide" EntitySet="Droide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wookie_Planete" Association="Self.FK_Wookie_Planete">
+            <End Role="Planete" EntitySet="Planete" />
+            <End Role="Wookie" EntitySet="Wookie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Droide">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Matricule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateDeF" Type="DateTime" Precision="3" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="PointsDeVie" Type="Int32" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Droide_Type" FromRole="Droide" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Planete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Wookie" Relationship="Self.FK_Wookie_Planete" FromRole="Planete" ToRole="Wookie" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Droide" Relationship="Self.FK_Droide_Type" FromRole="Type" ToRole="Droide" />
+        </EntityType>
+        <EntityType Name="Wookie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateDeN" Type="DateTime" Precision="3" />
+          <Property Name="Sexe" Type="Boolean" />
+          <Property Name="PlaneteID" Type="Int32" />
+          <NavigationProperty Name="Planete" Relationship="Self.FK_Wookie_Planete" FromRole="Wookie" ToRole="Planete" />
+        </EntityType>
+        <Association Name="FK_Droide_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Droide" Type="Self.Droide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Droide">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wookie_Planete">
+          <End Role="Planete" Type="Self.Planete" Multiplicity="0..1" />
+          <End Role="Wookie" Type="Self.Wookie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Wookie">
+              <PropertyRef Name="PlaneteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Droide" EntityType="Self.Droide" />
+          <EntitySet Name="Planete" EntityType="Self.Planete" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <EntitySet Name="Wookie" EntityType="Self.Wookie" />
+          <AssociationSet Name="FK_Droide_Type" Association="Self.FK_Droide_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Droide" EntitySet="Droide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wookie_Planete" Association="Self.FK_Wookie_Planete">
+            <End Role="Planete" EntitySet="Planete" />
+            <End Role="Wookie" EntitySet="Wookie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDDModelStoreContainer" CdmEntityContainer="BDDEntities">
+          <EntitySetMapping Name="Droide">
+            <EntityTypeMapping TypeName="BDDModel.Droide">
+              <MappingFragment StoreEntitySet="Droide">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+                <ScalarProperty Name="DateDeF" ColumnName="DateDeF" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="PointsDeVie" ColumnName="PointsDeVie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planete">
+            <EntityTypeMapping TypeName="BDDModel.Planete">
+              <MappingFragment StoreEntitySet="Planete">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="BDDModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wookie">
+            <EntityTypeMapping TypeName="BDDModel.Wookie">
+              <MappingFragment StoreEntitySet="Wookie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="DateDeN" ColumnName="DateDeN" />
+                <ScalarProperty Name="Sexe" ColumnName="Sexe" />
+                <ScalarProperty Name="PlaneteID" ColumnName="PlaneteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
