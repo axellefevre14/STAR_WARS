@@ -24,14 +24,17 @@ namespace STAR_WARS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Fight(int nbWookie, int nbDroide, int planete)
+        public ActionResult Fight(int nbWookie, int nbDroide, int planete, string nomBataille)
         {
             ActionResult result = this.RedirectToAction("Index", "Login");
             if (this.Session["USER_LOGIN"] != null && !string.IsNullOrEmpty(this.Session["USER_LOGIN"].ToString()))
             {
 
-                batailleLayer.add(new Bataille { Nom = "Bataille 1", PlaneteID = _dataLayer.getById(planete).ID });
+                Bataille bataille = new Bataille { Nom = nomBataille, PlaneteID = _dataLayer.getById(planete).ID };
 
+                batailleLayer.add(bataille);
+
+                ViewBag.bataille = bataille.Nom;
                 ViewBag.nbWookie = nbWookie;
                 ViewBag.nbDroide = nbDroide;
                 ViewBag.planete = _dataLayer.getById(planete);
